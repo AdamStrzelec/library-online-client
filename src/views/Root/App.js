@@ -1,6 +1,10 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 import './App.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faArrowAltCircleLeft, faArrowAltCircleRight)
 
 class App extends React.Component {
 
@@ -9,7 +13,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <h1>hello</h1>
       </div>
     );
   }

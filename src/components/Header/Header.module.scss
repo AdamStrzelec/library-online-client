@@ -1,5 +1,16 @@
 .header{
-    background-color: yellow;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 100vw;
-    height: 30vh;
+    height: 50vh;
+}
+.fontAwesome{
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    i{
+        width: 10px;
+        height: 10px;
+    }
 }
