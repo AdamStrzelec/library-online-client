@@ -14,6 +14,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
+        <h1>hello</h1>
       </div>
     );
   }
