@@ -6,7 +6,7 @@ import image3 from '../../../assets/images/carousel3.jpg';
 import image4 from '../../../assets/images/carousel4.jpg';
 import image5 from '../../../assets/images/carousel5.jpg';
 import CarouselImage from './CarouselImage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Carousel extends React.Component{
     state = {

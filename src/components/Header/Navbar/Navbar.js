@@ -4,7 +4,7 @@ import AppContext from '../../../context';
 import NavbarItem from './NavbarItem';
 import UnloggedUserMenu from './usersMenu/UnloggedUserMenu/UnloggedUserMenu';
 import LoggedUser from './usersMenu/LoggedUser/LoggedUser';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 const navbarItems = [
     'HOME',
@@ -19,10 +19,6 @@ class Navbar extends React.Component{
         // console.log(n.offsetTop);
       };
     render(){
-        // var n = ReactDOM.findDOMNode(this);
-        // if(n!==null){
-        //     console.log(n);
-        // }
 
         return(
             
@@ -40,7 +36,9 @@ class Navbar extends React.Component{
                     <div className={styles.userMenu}>
                         {context.userStatus==='logged' ? 
                             <LoggedUser userName={context.user.userName} userStatus={context.user.userStatus}/>:
-                            <UnloggedUserMenu />
+                            <UnloggedUserMenu
+                            openLoginModalFn={context.openLoginModal}
+                            openRegisterModalFn={context.openRegisterModal}/>
                         }
                     </div>
                     
