@@ -13,7 +13,7 @@ const navbarItems = [
     'KONTAKT',
 ];
 const navbarLink =[
-    '/home',
+    '/',
     '/about',
     '/top',
     '/contact',
