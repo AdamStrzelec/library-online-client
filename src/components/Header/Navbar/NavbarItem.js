@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './NavbarItem.module.scss';
+import { NavLink } from 'react-router-dom';
 
-const NavbarItem = ({link}) => (
+const NavbarItem = ({link,navhref}) => (
     <li className={styles.wrapper}>
-        <a href={'facebook.com'}>{link}</a>
+    <NavLink to={navhref}>{link}</NavLink>
     </li>
+    
 )
 
 export default NavbarItem;

@@ -12,6 +12,12 @@ const navbarItems = [
     'TOP 10',
     'KONTAKT',
 ];
+const navbarLink =[
+    '/home',
+    '/about',
+    '/top',
+    '/contact',
+]
 
 class Navbar extends React.Component{
     componentDidMount = () => {
@@ -27,10 +33,10 @@ class Navbar extends React.Component{
                 <div className={styles.wrapper} >
                     <div className={styles.navbar}>
                         <ul>
-                            <NavbarItem link={navbarItems[0]} />
-                            <NavbarItem link={navbarItems[1]} />
-                            <NavbarItem link={navbarItems[2]} />
-                            <NavbarItem link={navbarItems[3]} />
+                            <NavbarItem link={navbarItems[0]} navhref={navbarLink[0]} />
+                            <NavbarItem link={navbarItems[1]} navhref={navbarLink[1]}  />
+                            <NavbarItem link={navbarItems[2]} navhref={navbarLink[2]} />
+                            <NavbarItem link={navbarItems[3]} navhref={navbarLink[3]} />
                         </ul>
                     </div>
                     <div className={styles.userMenu}>
