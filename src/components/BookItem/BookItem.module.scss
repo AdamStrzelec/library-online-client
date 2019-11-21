@@ -1,0 +1,46 @@
+.wrapper{
+    width: 80%;
+    height: 200px;
+    background: blueviolet;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bookItemImage{
+    width: 120px;
+    height: 180px;
+    img{
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+.bookInfo{
+    width: 75%;
+    padding-left: 50px;
+
+    .bookName{
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 25px;
+        font-weight: 700;
+    }
+    .author{
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .descriptionWrapper{
+        max-height: 110px;
+        overflow: hidden;
+        .description{
+            margin: 0;
+        }
+    }
+}
