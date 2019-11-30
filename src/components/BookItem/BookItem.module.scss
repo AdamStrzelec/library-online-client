@@ -1,7 +1,8 @@
 .wrapper{
     width: 80%;
+    min-width: 900px;
     height: 200px;
-    background: blueviolet;
+    background: rgb(231, 231, 231);
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -10,37 +11,68 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 7px;
+    position: relative;
 }
 .bookItemImage{
     width: 120px;
     height: 180px;
     img{
-        width: 100%;
-        height: 180px;
+        width: 120px;
+        height: auto;
         object-fit: contain;
     }
 }
 .bookInfo{
-    width: 75%;
+    width: 80%;
     padding-left: 50px;
+    padding-right: 50px;
 
     .bookName{
         margin-top: 0;
         margin-bottom: 15px;
         font-size: 25px;
         font-weight: 700;
+        position: absolute;
+        top: 10px;
     }
     .author{
         margin-top: 0;
         margin-bottom: 15px;
         font-size: 15px;
         font-weight: 500;
+        position: absolute;
+        top: 45px;
+        color: orangered;
     }
     .descriptionWrapper{
         max-height: 110px;
         overflow: hidden;
+        position: absolute;
+        top: 70px;
+        width: 50%;
+        // max-width: 500px;
         .description{
             margin: 0;
+            font-size: 15px;
         }
     }
+    .rating{
+        position: absolute;
+        bottom: -2px;
+        color: rgb(139, 32, 32);
+        font-weight: bold;
+    }
+}
+.addBook{
+    width: 180px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    background: rgb(13, 168, 13);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import AppContext from '../../context';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import Header from '../../components/Header/Header';
 import Modal from '../../components/Modal/Modal';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -12,7 +12,7 @@ import Contact from '../Contact/Contact';
 import Top from '../Top/Top';
 
 
-library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes)
+library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart)
 
 const modalTypes = {
   login: 'login',

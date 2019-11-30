@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './BookItem.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 let bookDescriptionLimit = (description) => {
-    return description.substring(0, 250) + '...'
+    if(description.length > 250){
+        return description.substring(0, 250) + '...'
+    }
+    return description
 }
 
 const BookItem = ({book}) => (
@@ -17,10 +21,13 @@ const BookItem = ({book}) => (
             <div className={styles.descriptionWrapper}>
                 <p className={styles.description}>{bookDescriptionLimit(book.description)}</p>
             </div>
+            <p className={styles.rating}>Ocena: {book.rating}</p>
         </div>
         
         <div>
-            <button>Dodaj do koszyka</button>
+            <button className={styles.addBook}>
+                Dodaj do koszyka <FontAwesomeIcon icon="shopping-cart" size="1x" />
+            </button>
         </div>
     </div>
 )
