@@ -27,7 +27,7 @@
     width: 80%;
     padding-left: 50px;
     padding-right: 50px;
-
+    // position: relative;
     .bookName{
         margin-top: 0;
         margin-bottom: 15px;
@@ -36,15 +36,21 @@
         position: absolute;
         top: 10px;
     }
-    .author{
+    .authorWrapper{
         margin-top: 0;
         margin-bottom: 15px;
-        font-size: 15px;
-        font-weight: 500;
         position: absolute;
         top: 45px;
-        color: orangered;
+        display: flex;
+        flex-direction: row;
+        .author{
+            font-size: 15px;
+            font-weight: 500;
+            color: orangered;
+            margin-right: 20px;
+        }
     }
+
     .descriptionWrapper{
         max-height: 110px;
         overflow: hidden;
