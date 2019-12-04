@@ -27,4 +27,8 @@ router.post('/', (req, res, next) => {
     DAO.addBook(req.body, res)
 })
 
+router.get('/:bookId', (req, res)  => {
+    DAO.getBookById(req, res)
+})
+
 module.exports = router;
