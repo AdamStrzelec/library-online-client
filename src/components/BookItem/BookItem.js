@@ -3,12 +3,12 @@ import styles from './BookItem.module.scss';
 import BookItemAuthor from './BookItemAuthor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import AppContext from '../../context';
+
 
 
 
 let bookDescriptionLimit = (description, full) => {
-    if (full == true) {
+    if (full === true) {
         return description
     }
     if (description.length > 250) {
@@ -40,6 +40,7 @@ class BookItem extends React.Component {
 
     render() {
         const { book } = this.props;
+        console.log(book)
 
         return (
             <div className={styles.wrapper}>
@@ -50,27 +51,30 @@ class BookItem extends React.Component {
                 <div className={styles.bookInfo}>
 
 
-                    <NavLink className={styles.bookName} to={book.id}>{book.name}</NavLink>
+                    <NavLink className={styles.bookName} to={'book/'+book.id}>{book.name}</NavLink>
 
                     <div className={styles.descriptionWrapper}>
                         <p className={styles.description}>{bookDescriptionLimit(book.description, this.props.full)}</p>
                     </div>
 
                     <div className={styles.authorWrapper}>
-                        {book.authors.map(author => <div className={styles.author} key={author.author}><BookItemAuthor authorId={author.author} /></div>)}
+                        {book.authors.map(author => <div className={styles.author} 
+                         key={author.author}><BookItemAuthor authorId={this.props.full ==false ? author.author:author.authorId} /></div>)}
                     </div>
                     {/* <h3 className={styles.author}>{book.author}</h3> */}
 
-                    {<p className={styles.rating}>Ocena: {book.rating}</p>}
+                    <p className={styles.rating}>Ocena: {book.rating}</p>
                 </div>
 
                 <div>
                     <button className={styles.addBook}>
                         Dodaj do koszyka <FontAwesomeIcon icon="shopping-cart" size="1x" />
                     </button>
+                    <p>Ilość:</p>
+                    <p>cena:</p>
                 </div>
             </div>
-            
+
         )
 
     }
