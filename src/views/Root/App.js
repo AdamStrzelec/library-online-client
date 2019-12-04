@@ -10,6 +10,7 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import Contact from '../Contact/Contact';
 import Top from '../Top/Top';
+import Book from '../Book/Book'
 
 
 library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart)
@@ -63,6 +64,7 @@ class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/top" component={Top} />
             <Route path="/contact" component={Contact} />
+            <Route path="/:id" component={Book}/>
           </Switch>
           {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} modalType={this.state.modalType}/>}
           <h1>hello</h1>
