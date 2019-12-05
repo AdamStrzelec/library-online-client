@@ -6,6 +6,7 @@ const bookSchema = mongoose.Schema({
     bookImageUrl: { type: String, required: true},
     description: { type: String, required: false},
     price: { type: Number, required: true},
+    averageGrade: {type: Number, required: false}, 
     authors: [{authorId: {type: String, required: true}}]
 })
 

@@ -9,6 +9,7 @@ exports.addBook = function(bookBody, res){
         bookImageUrl: bookBody.bookImageUrl,
         description: bookBody.description,
         price: bookBody.price,
+        averageGrade: 0,
         authors: [...bookBody.authors]
      })
      book
