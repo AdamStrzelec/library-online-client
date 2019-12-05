@@ -31,6 +31,7 @@ class Book extends React.Component {
                     <BookItem book={books} key={books.id}  full={this.props.match.params.id = !undefined ? true : false} />)}      
                 </div>
             </div>
+            *************************************************************
         )
     }
 };

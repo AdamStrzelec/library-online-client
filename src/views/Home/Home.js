@@ -20,8 +20,7 @@ class Home extends React.Component{
     }
     render(){
         const { books } = this.state;
-        console.log(this.props.match.params.id)
-
+       
        
 
         return(
