@@ -37,6 +37,7 @@ exports.getBooks = function(res){
                     bookImageUrl: book.bookImageUrl,
                     description: book.description,
                     price: book.price,
+                    averageGrade: book.averageGrade,
                     authors: book.authors.map(author => {
                         return {author: author.authorId}
                     })
