@@ -47,3 +47,15 @@ exports.getBooks = function(res){
             res.status(500).json({message: err})
         })
 }
+
+exports.getBookById = function(req, res){
+    Book
+        .findById(req.params.bookId)
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                book: result
+            })
+        })
+        .catch(err => {res.status(500).json({errorek: err})})
+}
