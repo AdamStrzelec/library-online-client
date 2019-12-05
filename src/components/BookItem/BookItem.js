@@ -63,7 +63,7 @@ class BookItem extends React.Component {
                     </div>
                     {/* <h3 className={styles.author}>{book.author}</h3> */}
 
-                    <p className={styles.rating}>Ocena: {book.rating}</p>
+                    <p className={styles.rating}>Ocena: {book.averageGrade} / 5</p>
                 </div>
 
                 <div>
