@@ -1,35 +1,41 @@
 import React from 'react';
 import BookItem from '../../components/BookItem/BookItem';
 import './Book.css';
-
-
-
+import * as api from '../../helpers/booksApi';
+import BookInfo from '../../components/BookInfo/BookInfo';
 
 class Book extends React.Component {
 
     state = {
-        books: {
-            description: '',
-            authors: [''],
-            id: '/'
-        },
-        filter: this.props.match.params.id
+        book: {},
+        // authors: [],
+        reviews: [],
+        // books: {
+        //     description: '',
+        //     authors: [''],
+        //     id: '/'
+        // },
+        // filter: this.props.match.params.id
 
     }
-    componentDidMount = () => {
-
-        fetch('http://localhost:4000/books/' + this.state.filter)
-            .then(response => response.json())
-            .then(json => this.setState({ books: json.book }))
+    componentDidMount = async () => {
+        const bookJson = await api.getBookById(this.props.match.params.id);
+        // const authors = [];
+        this.setState({book: bookJson.book})
+        // await bookJson.book.authors.map(async author=>{  
+        //     const authorJson = await api.getAuthorById(author.authorId);
+        //     authors.push(authorJson);
+        // })
+        // await this.setState({authors: authors});
+        
     }
     render() {
-        const { books } = this.state;
+
+        // const { book } = this.state;
+        // console.log(book);
         return (
-            <div className="homeWrapper">
-                <div>searchbar</div>
-                <div className="items">
-                    <BookItem book={books} key={books.id}  full={this.props.match.params.id = !undefined ? true : false} />)}      
-                </div>
+            <div className="bookWrapper">
+                <BookInfo bookId={this.props.match.params.id}/>
             </div>
         )
     }

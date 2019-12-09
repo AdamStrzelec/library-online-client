@@ -67,7 +67,6 @@ class App extends React.Component {
             <Route path="/book/:id" component={Book}/>
           </Switch>
           {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} modalType={this.state.modalType}/>}
-          <h1>hello</h1>
         </AppContext.Provider>
       </div>
       </BrowserRouter>

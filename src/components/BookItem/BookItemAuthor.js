@@ -1,6 +1,6 @@
 import React from 'react';
 
-class BookAuthorItem extends React.Component {
+class BookItemAuthor extends React.Component {
     state = {
         author: '',
     }
@@ -13,10 +13,10 @@ class BookAuthorItem extends React.Component {
     render(){
 
         return(
-            <div>
+            <>
                 {this.state.author}
-            </div>
+            </>
         )
     }
 }
-export default BookAuthorItem;
+export default BookItemAuthor;

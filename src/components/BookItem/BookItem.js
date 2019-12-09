@@ -71,7 +71,7 @@ class BookItem extends React.Component {
                         Dodaj do koszyka <FontAwesomeIcon icon="shopping-cart" size="1x" />
                     </button>
                     <p>Ilość:</p>
-                    <p>cena:</p>
+                        <p>cena: {book.price} zł</p>
                 </div>
             </div>
 
