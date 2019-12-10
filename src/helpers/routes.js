@@ -5,3 +5,6 @@ export const booksApiUrl = id =>
 
 export const authorsApiUrl = id =>
     `${serverUrl}/authors/${id}`;
+
+export const reviewsApiUrl = id =>
+    `${serverUrl}/reviews/${id}`;
