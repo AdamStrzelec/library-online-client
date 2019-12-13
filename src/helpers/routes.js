@@ -5,3 +5,9 @@ export const booksApiUrl = id =>
 
 export const authorsApiUrl = id =>
     `${serverUrl}/authors/${id}`;
+
+export const createUserApiUrl = () =>
+    `${serverUrl}/users/signup`;
+
+export const loginUserApiUrl = () =>
+    `${serverUrl}/users/login`;

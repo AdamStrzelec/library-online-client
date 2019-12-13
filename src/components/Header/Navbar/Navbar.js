@@ -40,8 +40,8 @@ class Navbar extends React.Component{
                         </ul>
                     </div>
                     <div className={styles.userMenu}>
-                        {context.userStatus==='logged' ? 
-                            <LoggedUser userName={context.user.userName} userStatus={context.user.userStatus}/>:
+                        {context.userType==='logged' ? 
+                            <LoggedUser userName={context.user.name} userType={context.user.userType}/>:
                             <UnloggedUserMenu
                             openLoginModalFn={context.openLoginModal}
                             openRegisterModalFn={context.openRegisterModal}/>

@@ -7,6 +7,7 @@ const ModalInput = ({type, name, label, maxLength, ...props}) => (
             placeholder=" "
             type={type}
             name={name}
+            required
         />
         <label htmlFor={name}>{label}</label>
     </div>

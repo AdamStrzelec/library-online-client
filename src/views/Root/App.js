@@ -21,15 +21,13 @@ const modalTypes = {
 }
 
 class App extends React.Component {
-
+  // userName: 'adastr96',
+  // firstName: 'Adam',
+  // lastName: 'Strzelec',
+  // userStatus: 'admin'
   state = {
-    user: {
-      userName: 'adastr96',
-      firstName: 'Adam',
-      lastName: 'Strzelec',
-      userStatus: 'admin'
-    },
-    userStatus: 'unlogged',
+    user: {},
+    userType: 'unlogged',
     isModalOpen: false,
     modalType: modalTypes.login,
   }
@@ -48,11 +46,20 @@ class App extends React.Component {
       isModalOpen: true
     })
   }
+  changeUser = (user) => {
+    // this.setState({user: user,
+    //                 userType: 'logged'})
+    console.log('xDDDD')
+    console.log(user)
+    this.setState({user: user,
+                  userType: 'logged'})
+  }
   render(){
     const contextElements = {
       ...this.state,
       openLoginModal: this.openLoginModal,
-      openRegisterModal: this.openRegisterModal
+      openRegisterModal: this.openRegisterModal,
+      changeUser: this.changeUser,
     }
     return (
       <BrowserRouter>
@@ -66,7 +73,7 @@ class App extends React.Component {
             <Route path="/contact" component={Contact} />
             <Route path="/book/:id" component={Book}/>
           </Switch>
-          {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} modalType={this.state.modalType}/>}
+          {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType}/>}
         </AppContext.Provider>
       </div>
       </BrowserRouter>

@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const bookRoutes = require('./routes/books');
 const authorRoutes = require('./routes/authors');
 const reviewRoutes = require('./routes/reviews');
+const userRoutes = require('./routes/users');
 
 const uri = 'mongodb://Adam_96:Adam!2#4@node-rest-shop-shard-00-00-klt2b.mongodb.net:27017,node-rest-shop-shard-00-01-klt2b.mongodb.net:27017,node-rest-shop-shard-00-02-klt2b.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin&retryWrites=true';
 mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
@@ -21,6 +22,7 @@ app.use(cors());
 app.use('/books', bookRoutes);
 app.use('/authors', authorRoutes);
 app.use('/reviews', reviewRoutes);
+app.use('/users', userRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
