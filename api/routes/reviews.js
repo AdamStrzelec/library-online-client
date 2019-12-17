@@ -5,5 +5,8 @@ const DAO = require('../DAO/reviewsDAO')
 router.post('/', (req, res, next) => {
     DAO.addReview(req, res);
 })
+router.get('/:bookId', (req, res, next)  => {
+    DAO.getReviewsByBookId(req,res)
+})
 
 module.exports = router;

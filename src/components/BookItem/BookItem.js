@@ -7,10 +7,8 @@ import { NavLink } from 'react-router-dom';
 
 
 
-let bookDescriptionLimit = (description, full) => {
-    if (full === true) {
-        return description
-    }
+let bookDescriptionLimit = (description) => {
+    
     if (description.length > 250) {
         return description.substring(0, 250) + '...'
     }
@@ -59,7 +57,7 @@ class BookItem extends React.Component {
 
                     <div className={styles.authorWrapper}>
                         {book.authors.map(author => <div className={styles.author} 
-                         key={author.author}><BookItemAuthor authorId={this.props.full === false ? author.author:author.authorId} /></div>)}
+                         key={author.author}><BookItemAuthor authorId={author.author} /></div>)}
                     </div>
                     {/* <h3 className={styles.author}>{book.author}</h3> */}
 

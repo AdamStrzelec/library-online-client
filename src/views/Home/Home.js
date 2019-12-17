@@ -25,7 +25,7 @@ class Home extends React.Component{
             <div className="homeWrapper">
             <div>searchbar</div>
             <div className="items">                
-                {books.map(book => <BookItem key={book.id} book={book} full={this.props.match.params.id=!undefined ? false:true}/>)}
+                {books.map(book => <BookItem key={book.id} book={book} />)}
             </div>
             </div>
         )

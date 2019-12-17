@@ -42,3 +42,25 @@ exports.addReview = function(req, res){
         res.status(404).json({message: 'invalid book id'})
     })
 }
+exports.getReviewsByBookId = function(req,res){
+    
+    Review.find({})
+    .where('bookId').equals(req.params.bookId)
+    .then(result => {
+       res.status(200).json({reviews: result.map(review => {
+        
+           return {
+            id: review._id,
+            userId: review.userId,
+            bookId: review.bookId,
+            grade: review.grade,
+            review: review.review,
+            
+           }
+       })})
+     })
+   .catch(err => {
+       res.status(500).json({message: err})
+   })
+ 
+}

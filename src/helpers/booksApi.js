@@ -1,4 +1,4 @@
-import { booksApiUrl, authorsApiUrl } from './routes';
+import { booksApiUrl, authorsApiUrl,reviewsApiUrl } from './routes';
 import * as api from './api';
 
 export const getAllBooks = () =>
@@ -9,3 +9,7 @@ export const getBookById = id =>
 
 export const getAuthorById = id =>
     api.get(authorsApiUrl(id))
+    
+export const getReviewsByBookId = id =>
+    api.get(reviewsApiUrl(id))
+

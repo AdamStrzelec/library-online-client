@@ -10,7 +10,8 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import Contact from '../Contact/Contact';
 import Top from '../Top/Top';
-import Book from '../Book/Book'
+import Book from '../Book/Book';
+import LoggedUserPanel from '../../components/LoggedUserPanel/LoggedUserPanel';
 
 
 library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart)
@@ -21,14 +22,11 @@ const modalTypes = {
 }
 
 class App extends React.Component {
-  // userName: 'adastr96',
-  // firstName: 'Adam',
-  // lastName: 'Strzelec',
-  // userStatus: 'admin'
   state = {
     user: {},
     userType: 'unlogged',
     isModalOpen: false,
+    isUserMenuOpen: false,
     modalType: modalTypes.login,
   }
   closeModal = () => {
@@ -46,6 +44,13 @@ class App extends React.Component {
       isModalOpen: true
     })
   }
+  userMenuSwitch = () =>{
+    let { isUserMenuOpen } = this.state;
+    this.setState({isUserMenuOpen: !isUserMenuOpen});
+  }
+  logoutFn = () => {
+    this.setState({user: {}, userType: 'unlogged', isUserMenuOpen: false});
+  }
   changeUser = (user) => {
     // this.setState({user: user,
     //                 userType: 'logged'})
@@ -60,6 +65,8 @@ class App extends React.Component {
       openLoginModal: this.openLoginModal,
       openRegisterModal: this.openRegisterModal,
       changeUser: this.changeUser,
+      userMenuSwitch: this.userMenuSwitch,
+      logoutFn: this.logoutFn,
     }
     return (
       <BrowserRouter>
@@ -74,6 +81,7 @@ class App extends React.Component {
             <Route path="/book/:id" component={Book}/>
           </Switch>
           {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType}/>}
+          {this.state.isUserMenuOpen && <LoggedUserPanel /> }
         </AppContext.Provider>
       </div>
       </BrowserRouter>
