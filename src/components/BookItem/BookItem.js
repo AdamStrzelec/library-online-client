@@ -38,8 +38,6 @@ class BookItem extends React.Component {
 
     render() {
         const { book } = this.props;
-        console.log(book)
-
         return (
             <div className={styles.wrapper}>
                 <div className={styles.bookItemImage}>

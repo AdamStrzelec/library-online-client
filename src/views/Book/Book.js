@@ -38,7 +38,7 @@ class Book extends React.Component {
         const  reviews  = this.state.reviews;
         // const { book } = this.state;
         // console.log(book);
-        console.log(reviews)
+        //console.log(reviews)
         return (
             <>
             <div className="bookWrapper">

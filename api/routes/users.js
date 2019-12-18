@@ -8,5 +8,9 @@ router.post('/signup', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     DAO.loginUser(req, res);
 })
+router.put('/edit/:userId',(req,res,next) =>{
+    DAO.editUser(req,res);
+  
+})
 
 module.exports = router;

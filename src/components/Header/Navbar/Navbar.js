@@ -27,9 +27,11 @@ class Navbar extends React.Component{
     render(){
 
         return(
-            
             <AppContext.Consumer>
+                            
+
             {(context)=>(
+                
                 <div className={styles.wrapper} >
                     <div className={styles.navbar}>
                         <ul>
@@ -50,6 +52,7 @@ class Navbar extends React.Component{
                     
                 </div>
             )}
+            
         </AppContext.Consumer>
         )
     }
