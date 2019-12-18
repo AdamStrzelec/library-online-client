@@ -46,7 +46,7 @@ class UserInfo extends React.Component {
                 user: response.user,
                 message: 'Utworzono użytkownika'
             })
-            this.props.changeUserFn(this.state.user);
+            
         }
     }else{
     this.setState({ message: 'Pola hasło i powtórz hasło muszą być takie same' })
