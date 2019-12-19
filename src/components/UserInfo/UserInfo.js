@@ -10,19 +10,21 @@ class UserInfo extends React.Component {
     state = {
         user: {},
         userDataFetched: false,
-        message: null
+        message: null,
         
     }
-    componentDidMount() {
-
+    componentDidMount = async () => {
+       
+        
     }
     handleChange(event) {
         this.setState({value: event.target.value});
       }
     
-    userEdit = async (body, repeatPassword) => {
+    userEdit = async (body, repeatPassword,id) => {
+       
         if (body.password === repeatPassword) {
-            const response = await fetch('http://localhost:4000/users/edit/5defa0b4b37bfb570c9a5008',{
+            const response = await fetch('http://localhost:4000/users/edit/5defa0b4b37bfb570c9a5008'+id,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)})
@@ -65,21 +67,23 @@ submitForm = (e) => {
         street: e.target[6].value,
         homeNumber: e.target[7].value,
         phoneNumber: e.target[4].value
-    }, e.target[9].value)
+    }, e.target[9].value,e.target[0].id)
   
 
     
 }
 
 render(){
+   
     return (
         <AppContext.Consumer>
               {(context)=>(
+                  
             <form autoComplete="off" onSubmit={this.submitForm}>
                 <h2 className={styles.modalTitle}>Edycja</h2>
                 <div>
                     <label>login</label>
-                <UserEditInput type='text' name='userName'  value={context.user.login}  />
+                <UserEditInput type='text' name='userName' id={context.user._id}  value={context.user.login}  />
                 </div>
                 <div>
                 <label>Imię</label>

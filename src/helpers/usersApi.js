@@ -1,4 +1,4 @@
-import { createUserApiUrl, loginUserApiUrl } from './routes';
+import { createUserApiUrl, loginUserApiUrl,editUserApiUrl } from './routes';
 import * as api from './api';
 
 export const createUser = (body) => {
@@ -11,4 +11,7 @@ export const loginUser = (body) => {
 
 export const logUser = (body) => {
     api.apiCall(loginUserApiUrl(),'POST', body)
+}
+export const editUser =(id,body) =>{
+    api.apiCall(editUserApiUrl(id),'PUT',body)
 }
