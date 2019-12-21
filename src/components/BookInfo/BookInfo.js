@@ -39,9 +39,9 @@ class BookInfo extends React.Component {
                         </ul>
                     </div>
                     <div className={styles.additionalInfo}>
-                        <p>Średnia ocena: <strong>{book.averageGrade} / 5</strong></p>
-                        <p>Ilość ocen: <strong>TO DO</strong></p>
-                        <button className={styles.addGradeButton}>Dodaj ocenę</button>
+                        <p>Średnia ocena: <strong>{this.props.averageGrade} / 5</strong></p>
+                        <p>Ilość ocen: <strong>{this.props.reviewsCount}</strong></p>
+                        {/* <button className={styles.addGradeButton}>Dodaj ocenę</button> */}
                     </div>
                 </div>
 

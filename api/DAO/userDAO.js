@@ -51,3 +51,17 @@ exports.loginUser = function(req, res){
     })
     .catch(err => res.status(500).json({error: err}))
 }
+
+exports.getUserName = function(req, res){
+    User.findById(req.params.userId)
+    .exec()
+    .then(result => {
+        if(result){
+            res.status(200).json({userName: result.login})
+        }else{
+            res.status(404).json({userName: 'No name'})
+        }
+        
+    })
+    .catch(err => {res.status(500).json({error: err})})
+}

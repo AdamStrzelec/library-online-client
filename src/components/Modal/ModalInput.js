@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ModalInput.module.scss';
 
-const ModalInput = ({type, name, label, maxLength, ...props}) => (
+const ModalInput = ({type, name, label, maxLength, setValue, ...props}) => (
     <div className={styles.wrapper}>
-        <input
+        <input onChange={setValue}
             placeholder=" "
             type={type}
             name={name}

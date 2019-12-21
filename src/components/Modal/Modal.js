@@ -117,10 +117,14 @@ class Modal extends React.Component {
                 <div className={styles.modalBackground}>
                 <div className={styles.modalWindow}>
                     <button className={styles.closeModalButton} onClick={closeModalFn}><FontAwesomeIcon icon="times" size="2x" /></button>
-                        {!this.state.userDataFetched ?
+                        {this.props.modalType!=='info' ? !this.state.userDataFetched ?
                             this.displayForm(modalType):
-                            <div>
-                                <h2>{this.state.message}</h2>
+                            <div className={styles.infoModal}>
+                                <h2 className={styles.modalInfoMessage}>{this.state.message}</h2>
+                                <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
+                            </div>
+                            : <div className={styles.infoModal}>
+                                <h2 className={styles.modalInfoMessage}>{this.props.modalInfo}</h2>
                                 <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
                             </div>}
                     </div>

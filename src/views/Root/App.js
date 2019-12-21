@@ -19,6 +19,7 @@ library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSo
 const modalTypes = {
   login: 'login',
   register: 'register',
+  info: 'info',
 }
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
     isModalOpen: false,
     isUserMenuOpen: false,
     modalType: modalTypes.login,
+    modalInfoMessage: '',
   }
   closeModal = () => {
     this.setState({isModalOpen: false})
@@ -44,6 +46,13 @@ class App extends React.Component {
       isModalOpen: true
     })
   }
+  openInfoModal = (message) => {
+    this.setState({
+      modalType: modalTypes.info,
+      isModalOpen: true,
+      modalInfoMessage: message
+    })
+  }
   userMenuSwitch = () =>{
     let { isUserMenuOpen } = this.state;
     this.setState({isUserMenuOpen: !isUserMenuOpen});
@@ -54,7 +63,7 @@ class App extends React.Component {
   changeUser = (user) => {
     // this.setState({user: user,
     //                 userType: 'logged'})
-    console.log('xDDDD')
+    // console.log('xDDDD')
     console.log(user)
     this.setState({user: user,
                   userType: 'logged'})
@@ -64,6 +73,7 @@ class App extends React.Component {
       ...this.state,
       openLoginModal: this.openLoginModal,
       openRegisterModal: this.openRegisterModal,
+      openInfoModal: this.openInfoModal,
       changeUser: this.changeUser,
       userMenuSwitch: this.userMenuSwitch,
       logoutFn: this.logoutFn,
@@ -80,7 +90,7 @@ class App extends React.Component {
             <Route path="/contact" component={Contact} />
             <Route path="/book/:id" component={Book}/>
           </Switch>
-          {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType}/>}
+          {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType} modalInfo={this.state.modalInfoMessage}/>}
           {this.state.isUserMenuOpen && <LoggedUserPanel /> }
         </AppContext.Provider>
       </div>

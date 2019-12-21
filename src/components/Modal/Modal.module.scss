@@ -72,3 +72,23 @@
         }
     }
 }
+.infoModal{
+    width: 100%;
+    text-align: center;
+
+    .modalInfoMessage{
+        font-weight: 400;
+    }
+    .confirmButton{
+        height: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: rgb(35, 142, 88);
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        outline: none;
+        cursor: pointer;
+    }
+}

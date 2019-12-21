@@ -6,81 +6,35 @@
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 50px;
-    padding-right: 50px;
+    // padding-left: 50px;
+    // padding-right: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 7px;
     position: relative;
 }
-.bookItemImage{
-    width: 120px;
-    height: 180px;
-    img{
-        width: 120px;
-        height: auto;
-        object-fit: contain;
-    }
-}
-.bookInfo{
-    width: 80%;
-    padding-left: 50px;
-    padding-right: 50px;
-    // position: relative;
-    .bookName{
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-size: 25px;
-        font-weight: 700;
-        position: absolute;
-        top: 10px;
-    }
+.reviewHeader{
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 60px);
+    padding: 10px 30px;
+    background: rgb(65, 65, 65);
+    font-weight: bold;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: white;
     .authorWrapper{
-        margin-top: 0;
-        margin-bottom: 15px;
-        position: absolute;
-        top: 45px;
-        display: flex;
-        flex-direction: row;
-        .author{
-            font-size: 15px;
-            font-weight: 500;
-            color: orangered;
-            margin-right: 20px;
-        }
+        margin: 0 20px;
     }
-
-    .descriptionWrapper{
-        max-height: 110px;
-        overflow: hidden;
-        position: absolute;
-        top: 70px;
-        width: 50%;
-        // max-width: 500px;
-        .description{
-            margin: 0;
-            font-size: 15px;
+    .gradeWrapper{
+        strong{
+            color: rgb(43, 144, 226);
         }
-    }
-    
-    
-    .rating{
-        position: absolute;
-        bottom: -2px;
-        color: rgb(139, 32, 32);
-        font-weight: bold;
     }
 }
-.addBook{
-    width: 180px;
-    height: 40px;
-    font-size: 16px;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    background: rgb(13, 168, 13);
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    cursor: pointer;
+.review{
+    width: 100%;
+    padding: 10px 30px;
 }

@@ -5,7 +5,8 @@ const reviewSchema = mongoose.Schema({
     userId: {type: String, required: true},
     bookId: {type: String, required: true},
     grade: {type: Number, required: true},
-    review: {type: String, required: true}
+    review: {type: String, required: true},
+    date: {type: Date, required: true}
 })
 
 module.exports = mongoose.model('Review', reviewSchema);

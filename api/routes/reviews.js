@@ -8,5 +8,8 @@ router.post('/', (req, res, next) => {
 router.get('/:bookId', (req, res, next)  => {
     DAO.getReviewsByBookId(req,res)
 })
+router.get('/averageGrade/:bookId', (req, res,next) => {
+    DAO.getAverageGrade(req, res)
+})
 
 module.exports = router;

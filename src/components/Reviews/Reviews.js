@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Reviews.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GetUserName from '../GetName/GetUserName';
 
 
 class Reviews extends React.Component {
@@ -17,18 +18,19 @@ class Reviews extends React.Component {
             <div className={styles.wrapper}>
                 
 
-                <div className={styles.bookInfo}>               
+                <div className={styles.reviewHeader}>               
 
                     <div className={styles.authorWrapper}>
-                        {review.userId} 
-                         
+                        <p><GetUserName userId={review.userId} /> </p> 
                     </div>
              
-
-                    <p className={styles.rating}>Ocena: {review.grade} / 5</p>
+                    <div className={styles.gradeWrapper}>
+                        <p className={styles.rating}>Ocena: <strong>{review.grade} / 5</strong></p>
+                    </div>
+                    
                 </div>
-                <div>
-                <p>{review.review}</p>
+                <div className={styles.review}>
+                    <p>{review.review}</p>
                 </div>
                 
             </div>
