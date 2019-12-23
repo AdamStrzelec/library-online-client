@@ -12,12 +12,22 @@ class UserEdit extends React.Component{
             
     
         }
+     
+            this.handleChange = this.handleChange.bind(this);
+
         
-    this.handleChange = this.handleChange.bind(this);
     }
    
     handleChange(event) {
+        if(this.state.name== "userName"){
+
+        }
+        else if(this.state.name =="email"){
+            
+        }
+        else{
         this.setState({value: event.target.value});
+        }
       }
 
 
