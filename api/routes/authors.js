@@ -30,4 +30,17 @@ router.post('/', (req, res, next) => {
         .catch(err => res.status(500).json({message: err}))
 })
 
+router.get('/author/:name', (req, res, next) => {
+    // res.status(200).json({author: req.params})
+    console.log(req.params.name);
+    Author.find({'authorName': { "$regex": req.params.name, "$options": "i" }})
+    .exec()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json({error: err})
+    })
+})
+
 module.exports = router;

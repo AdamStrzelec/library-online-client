@@ -11,7 +11,10 @@ import Home from '../Home/Home';
 import Contact from '../Contact/Contact';
 import Top from '../Top/Top';
 import Book from '../Book/Book';
+import User from '../User/User'
 import LoggedUserPanel from '../../components/LoggedUserPanel/LoggedUserPanel';
+import AddBookView from '../AddBook/AddBookView';
+// import AddBookView from '../'
 
 
 library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart)
@@ -64,7 +67,8 @@ class App extends React.Component {
     // this.setState({user: user,
     //                 userType: 'logged'})
     // console.log('xDDDD')
-    console.log(user)
+    // console.log(user)
+    
     this.setState({user: user,
                   userType: 'logged'})
   }
@@ -89,6 +93,8 @@ class App extends React.Component {
             <Route path="/top" component={Top} />
             <Route path="/contact" component={Contact} />
             <Route path="/book/:id" component={Book}/>
+            <Route path="/add/book" component={AddBookView}/>
+            <Route path="/user/:id" component={User}/>
           </Switch>
           {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType} modalInfo={this.state.modalInfoMessage}/>}
           {this.state.isUserMenuOpen && <LoggedUserPanel /> }

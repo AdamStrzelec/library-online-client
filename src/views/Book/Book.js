@@ -103,6 +103,9 @@ class Book extends React.Component {
         const  reviews  = this.state.reviews;
         // console.log(reviews)
         // onSubmit={this.submit}
+        // const { book } = this.state;
+        // console.log(book);
+        //console.log(reviews)
         return (
             <AppContext.Consumer>
                 {(context)=>(
@@ -115,7 +118,7 @@ class Book extends React.Component {
                     
                         
                         <ModalInput type='number' name='grade' label='Ocena' setValue={this.setGrade}/>
-                        <ModalInput type='textarea' name='review' label='Opinia' setValue={this.setReview}/>
+                        <ModalInput tag='textarea' name='review' label='Opinia' setValue={this.setReview}/>
 
                         <button onClick={() => this.submit(context.userType, context.user, context)} className="addReviewBtn">Dodaj ocenę</button>
 

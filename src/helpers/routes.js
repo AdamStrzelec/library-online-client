@@ -13,3 +13,5 @@ export const loginUserApiUrl = () =>
     `${serverUrl}/users/login`;
 export const reviewsApiUrl = id =>
     `${serverUrl}/reviews/${id}`;
+export const editUserApiUrl = id =>
+    `${serverUrl}/users/${id}`;

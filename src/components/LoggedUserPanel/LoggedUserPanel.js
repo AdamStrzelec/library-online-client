@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './LoggedUserPanel.module.scss';
 import AppContext from '../../context';
+import { NavLink } from 'react-router-dom';
 
 
 class LoggedUserPanel extends React.Component{
@@ -12,8 +13,12 @@ class LoggedUserPanel extends React.Component{
                 {context => (
                 <div className={styles.wrapper} >
                     <ul>
-                        <li>Moje konto</li>
-                        <li>Moje książki</li>
+                        <li><NavLink to={'/user/'+context.user._id}>Moje Konto</NavLink></li>
+                        <li>
+                            {context.user.userType==='admin'?
+                                <NavLink to={'/add/book'}>Dodak książkę</NavLink>:
+                                'Moje książki'}
+                        </li>
                         <li>
                             <button onClick={context.logoutFn}>
                                 Wyloguj się

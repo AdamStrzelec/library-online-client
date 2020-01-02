@@ -1,16 +1,24 @@
 import React from 'react';
 import styles from './ModalInput.module.scss';
 
-const ModalInput = ({type, name, label, maxLength, setValue, ...props}) => (
+const ModalInput = ({tag: Tag, type, name, label, maxLength, setValue, ...props}) => (
     <div className={styles.wrapper}>
-        <input onChange={setValue}
+        <Tag onChange={setValue}
+            autoComplete='off'
             placeholder=" "
             type={type}
             name={name}
+            maxLength={maxLength}
             required
+            className={Tag==='textarea' ? styles.textarea : styles.input}
         />
         <label htmlFor={name}>{label}</label>
     </div>
 )
+
+ModalInput.defaultProps = {
+    tag: 'input',
+    maxLength: 200,
+}
 
 export default ModalInput;

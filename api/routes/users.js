@@ -11,5 +11,9 @@ router.post('/login', (req, res, next) => {
 router.get('/name/:userId', (req, res, next) => {
     DAO.getUserName(req, res);
 })
+router.put('/edit/:userId',(req,res,next) =>{
+    DAO.editUser(req,res);
+  
+})
 
 module.exports = router;
