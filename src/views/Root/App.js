@@ -95,6 +95,8 @@ class App extends React.Component {
             <Route path="/book/:id" component={Book}/>
             <Route path="/add/book" component={AddBookView}/>
             <Route path="/user/:id" component={User}/>
+            <Route path="/edit/book/:id" component={AddBookView}/>
+
           </Switch>
           {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType} modalInfo={this.state.modalInfoMessage}/>}
           {this.state.isUserMenuOpen && <LoggedUserPanel /> }

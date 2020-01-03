@@ -6,6 +6,7 @@ import * as api from '../../helpers/booksApi';
 import BookInfo from '../../components/BookInfo/BookInfo';
 import Reviews from '../../components/Reviews/Reviews';
 import ModalInput from '../../components/Modal/ModalInput';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -121,6 +122,10 @@ class Book extends React.Component {
                         <ModalInput tag='textarea' name='review' label='Opinia' setValue={this.setReview}/>
 
                         <button onClick={() => this.submit(context.userType, context.user, context)} className="addReviewBtn">Dodaj ocenę</button>
+                        {context.user.userType==='admin'?
+                                <NavLink to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
+                                }
+                       
 
                 </div>
                 <div>

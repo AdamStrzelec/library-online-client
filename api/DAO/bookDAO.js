@@ -83,3 +83,38 @@ exports.addPhysicalBook = function(req, res){
     })
     .catch(err => {res.status(500).json({error: err})})
 }
+
+exports.editBookById = function(req, res){
+    const id ={_id:req.params.bookId}
+    Book.find({ _id: req.params.bookId })
+        .exec()
+        .then(book => {
+            if (book.length >= 1) {
+           console.log(book)
+            const bookEdited={
+                name: req.body.name,
+                bookImageUrl: req.body.bookImageUrl,
+                description: req.body.description,
+                price: req.body.price,
+                averageGrade: book.averageGrade,
+                authors: [...req.body.authors],
+                date: new Date(),
+                
+
+            }
+            console.log(id)
+            console.log(bookEdited)
+            
+
+            Book.updateOne(id, bookEdited)
+             .then(() => res.status(201).json({ book: bookEdited }))
+             .catch(err => res.status(500).json({ err }))
+               
+        }
+    }
+    )
+    
+    .catch(err => err)
+}
+    
+

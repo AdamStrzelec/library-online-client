@@ -34,5 +34,8 @@ router.get('/:bookId', (req, res)  => {
 router.post('/addPhysicalBook', (req, res) => {
     DAO.addPhysicalBook(req, res);
 })
+router.put('/:bookId', (req, res)  => {
+    DAO.editBookById(req, res)
+})
 
 module.exports = router;

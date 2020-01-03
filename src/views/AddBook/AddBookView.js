@@ -2,8 +2,10 @@ import React from 'react';
 import AppContext from '../../context';
 import ModalInput from '../../components/Modal/ModalInput';
 import styles from './AddBookView.module.scss';
+import * as api from '../../helpers/booksApi';
 
 class AddBookView extends React.Component {
+    
     state = {
         bookNameDraft: '',
         imgUrlDraft: '',
@@ -13,8 +15,15 @@ class AddBookView extends React.Component {
         addedAuhors: [],
         foundedAuthors: [],
         authorFocused: false,
+        
+      
     }
 
+    componentDidMount = async () => {
+        const bookJson = await api.getBookById(this.props.match.params.id);
+        
+        
+    }
     changeBookDraftProperty = (e, name) => {
         this.setState({[name]: e.target.value})
     }
@@ -46,6 +55,19 @@ class AddBookView extends React.Component {
     }
 
     addBook = async (context) => {
+        let id=this.props.match.params.id;
+        let fetchLink='';
+        let postOrPut='';
+     
+        if(id==="undefined"){
+             fetchLink='http://localhost:4000/books';
+             postOrPut='POST'
+        }
+        else{
+            fetchLink='http://localhost:4000/books/'+id
+            postOrPut='PUT'
+        }
+        
         const authorsId = [];
         for(let i=0; i<this.state.addedAuhors.length; i++){
             authorsId.push({authorId: this.state.addedAuhors[i]._id});
@@ -60,8 +82,8 @@ class AddBookView extends React.Component {
         }
 
         if(this.addBookIsFilled()){
-            const response = await fetch('http://localhost:4000/books',{
-                method: 'POST',
+            const response = await fetch(fetchLink,{
+                method: postOrPut,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(book)})
                 .then(result => {
@@ -88,7 +110,7 @@ class AddBookView extends React.Component {
                 {context => (
                     <div className={styles.wrapper}>
                     <h2 className={styles.header}>Dodaj książkę</h2>
-                    <ModalInput type='text' name='book name' label='Nazwa książki' setValue={(e) => this.changeBookDraftProperty(e, 'bookNameDraft')} />
+                    <ModalInput type='text' name='book name' label='Nazwa książki'  setValue={(e) => this.changeBookDraftProperty(e, 'bookNameDraft')} />
                     <ModalInput type='text' name='img url' label='Adres obrazka' setValue={(e) => this.changeBookDraftProperty(e, 'imgUrlDraft')} />
                     <ModalInput tag='textarea' type='text' name='description' label='Opis' maxLength={500} setValue={(e) => this.changeBookDraftProperty(e, 'descriptionDraft')} />
                     <ModalInput type='number' name='price' label='Cena' setValue={(e) => this.changeBookDraftProperty(e, 'priceDraft')} />
