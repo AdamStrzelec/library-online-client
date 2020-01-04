@@ -15,12 +15,32 @@ class AddBookView extends React.Component {
         addedAuhors: [],
         foundedAuthors: [],
         authorFocused: false,
-        
-      
     }
 
     componentDidMount = async () => {
-        const bookJson = await api.getBookById(this.props.match.params.id);
+        if(this.props.match.params.id){
+            const authors = [];
+            console.log('edit')
+            const bookJson = await api.getBookById(this.props.match.params.id);
+            for(let i=0; i<bookJson.book.authors.length; i++){
+                console.log(bookJson.book.authors[i].authorId)
+                await fetch('http://localhost:4000/authors/fullAuthorData/'+bookJson.book.authors[i].authorId)
+                        .then(response => response.json())
+                        .then(json => authors.push(json))
+            }
+            console.log(bookJson)
+            console.log(authors);
+            
+            this.setState({bookNameDraft: bookJson.book.name,
+                            imgUrlDraft: bookJson.book.bookImageUrl,
+                            descriptionDraft: bookJson.book.description,
+                            priceDraft: bookJson.book.price,
+                            addedAuhors: authors})
+            // console.log(bookJson.book.authors)
+        }else{
+            console.log('add')
+        }
+        
         
         
     }
@@ -55,18 +75,23 @@ class AddBookView extends React.Component {
     }
 
     addBook = async (context) => {
+        // console.log('add book')
         let id=this.props.match.params.id;
         let fetchLink='';
         let postOrPut='';
      
-        if(id==="undefined"){
-             fetchLink='http://localhost:4000/books';
-             postOrPut='POST'
-        }
-        else{
+
+        if(this.props.match.params.id){
             fetchLink='http://localhost:4000/books/'+id
             postOrPut='PUT'
-        }
+            console.log('edit book')
+            // const bookJson = await api.getBookById(this.props.match.params.id);
+            // console.log(bookJson);
+        }else{
+            fetchLink='http://localhost:4000/books';
+            postOrPut='POST';
+            console.log('add book')
+       }
         
         const authorsId = [];
         for(let i=0; i<this.state.addedAuhors.length; i++){
@@ -80,7 +105,7 @@ class AddBookView extends React.Component {
             price: this.state.priceDraft,
             authors: authorsId
         }
-
+        console.log(book)
         if(this.addBookIsFilled()){
             const response = await fetch(fetchLink,{
                 method: postOrPut,
@@ -101,7 +126,7 @@ class AddBookView extends React.Component {
 
     addBookIsFilled = () => {
         const { bookNameDraft, imgUrlDraft, descriptionDraft, priceDraft, addedAuhors } = this.state;
-        return bookNameDraft.length > 0 && imgUrlDraft.length > 0 && descriptionDraft.length > 0 && priceDraft.length > 0 && addedAuhors.length > 0;
+        return bookNameDraft.length > 0 && imgUrlDraft.length > 0 && descriptionDraft.length > 0 && priceDraft > 0 && addedAuhors.length > 0;
     }
 
     render(){
@@ -110,10 +135,10 @@ class AddBookView extends React.Component {
                 {context => (
                     <div className={styles.wrapper}>
                     <h2 className={styles.header}>Dodaj książkę</h2>
-                    <ModalInput type='text' name='book name' label='Nazwa książki'  setValue={(e) => this.changeBookDraftProperty(e, 'bookNameDraft')} />
-                    <ModalInput type='text' name='img url' label='Adres obrazka' setValue={(e) => this.changeBookDraftProperty(e, 'imgUrlDraft')} />
-                    <ModalInput tag='textarea' type='text' name='description' label='Opis' maxLength={500} setValue={(e) => this.changeBookDraftProperty(e, 'descriptionDraft')} />
-                    <ModalInput type='number' name='price' label='Cena' setValue={(e) => this.changeBookDraftProperty(e, 'priceDraft')} />
+                    <ModalInput type='text' name='book name' label='Nazwa książki' value={this.state.bookNameDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'bookNameDraft')} />
+                    <ModalInput type='text' name='img url' label='Adres obrazka' value={this.state.imgUrlDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'imgUrlDraft')} />
+                    <ModalInput tag='textarea' type='text' name='description' value={this.state.descriptionDraft || ''} label='Opis' maxLength={500} setValue={(e) => this.changeBookDraftProperty(e, 'descriptionDraft')} />
+                    <ModalInput type='number' name='price' label='Cena' value={this.state.priceDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'priceDraft')} />
                     <div className={styles.author} >
                         <div className={styles.searchAuthor} id='searchAuthor'>
                             <ModalInput type='text' name='author name' label='Nazwa autora' id='authorInput' setValue={(e) => this.findAuthors(e)}  />
@@ -131,7 +156,7 @@ class AddBookView extends React.Component {
                                 {this.state.addedAuhors.map(author => <li key={author._id}>{author.authorName} <span onClick={()=>this.removeAuthor(author)}>X</span></li>)}
                             </ul>
                         </div>
-                        <button className={styles.addBookButton} onClick={()=>this.addBook(context)}>Dodaj książkę</button>
+                        <button className={styles.addBookButton} onClick={()=>this.addBook(context)}>{this.props.match.params.id ? 'Edytuj książkę' : 'Dodaj książkę'}</button>
                     </div>
                     
                 </div>

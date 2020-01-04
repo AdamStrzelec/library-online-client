@@ -15,6 +15,36 @@ router.get('/:authorId', (req, res, next) => {
             res.status(404).json({message: 'author not exist'})
         })
 })
+router.get('/fullAuthorData/:authorId', (req, res, next)=>{
+    Author.findById(req.params.authorId)
+        .exec()
+        .then(result => {
+            if(result){
+                res.status(200).json(result);
+            }else{
+                res.status(404).json({message: 'author not exists'});
+            }
+            
+        })
+        .catch(err => res.status(500).json({error: err}));
+    // Author.findByIdAndUpdate(req.params.authorId, {$set:
+    //     {name: req.body.name,
+    //     bookImageUrl: req.body.bookImageUrl,
+    //     description: req.body.description,
+    //     price: req.body.price,
+    //     authors: req.body.authors}
+    // })
+    // .exec()
+    // .then(result => {
+    //     if(result){
+    //         res.status(201).json(result);
+    //     }else{
+    //         res.status(404).json({message: 'author not exists'});
+    //     }
+        
+    // })
+    // .catch(err => res.status(500).json({error: err}));
+})
 
 router.post('/', (req, res, next) => {
     const author = new Author({

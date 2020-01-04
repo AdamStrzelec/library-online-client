@@ -96,9 +96,9 @@ exports.editBookById = function(req, res){
                 bookImageUrl: req.body.bookImageUrl,
                 description: req.body.description,
                 price: req.body.price,
-                averageGrade: book.averageGrade,
+                // averageGrade: book.averageGrade,
                 authors: [...req.body.authors],
-                date: new Date(),
+                // date: new Date(),
                 
 
             }
