@@ -31,9 +31,12 @@ router.get('/:bookId', (req, res)  => {
     DAO.getBookById(req, res)
 })
 
-router.post('/addPhysicalBook', (req, res) => {
-    DAO.addPhysicalBook(req, res);
-})
+
+// router.get('/getTotalCount/:bookId', (req, res, next) => {
+//     // DAO.getPhysicalBooks(req, res);
+//     // console.log(req.params.bookId)
+//     res.status(200).json({ksiazka: req.params.bookId})
+// })
 router.put('/:bookId', (req, res)  => {
     DAO.editBookById(req, res)
 })

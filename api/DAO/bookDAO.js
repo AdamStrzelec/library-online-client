@@ -2,6 +2,7 @@ const Book = require('../models/book');
 const PhysicalBook = require('../models/physicalBook');
 const Author = require('../models/author');
 const mongoose = require('mongoose');
+const PhysicalBookDAO = require('./physicalBooksDAO');
 
 exports.addBook = function(bookBody, res){
     const book = new Book({
@@ -17,6 +18,12 @@ exports.addBook = function(bookBody, res){
      book
      .save()
      .then(result =>{
+        if(bookBody.addBooksQuatity>0){
+            PhysicalBookDAO.addPhysicalBooks(result._id, bookBody.addBooksQuatity)
+        }
+        if(bookBody.deleteBooksQuantity>0){
+            PhysicalBookDAO.removePhysicalBooks(result._id, bookBody.deleteBooksQuantity)
+        }
          res.status(201).json({
              message: 'book created',
              book: bookBody
@@ -64,28 +71,11 @@ exports.getBookById = function(req, res){
         .catch(err => {res.status(500).json({errorek: err})})
 }
 
-exports.addPhysicalBook = function(req, res){
-    Book.findById(req.body.bookId)
-    .then(book =>{
-        if(book){
-            for(let i=0; i<req.body.booksCount; i++){
-                const physicalBook = new PhysicalBook({
-                    _id: new mongoose.Types.ObjectId(),
-                    bookId: req.body.bookId,
-                    loan: false
-                })
-                physicalBook.save()
-            }
-            res.status(201).json({message: 'books added'})
-        }else{
-            res.status(404).json({message: 'book not exist'})
-        }
-    })
-    .catch(err => {res.status(500).json({error: err})})
-}
 
 exports.editBookById = function(req, res){
     const id ={_id:req.params.bookId}
+    idBook = req.params.bookId;
+    // let bookIdis = '';
     Book.find({ _id: req.params.bookId })
         .exec()
         .then(book => {
@@ -107,7 +97,19 @@ exports.editBookById = function(req, res){
             
 
             Book.updateOne(id, bookEdited)
-             .then(() => res.status(201).json({ book: bookEdited }))
+             .then(() => {
+                //  PhysicalBookDAO.addPhysicalBooks()
+                 if(req.body.addBooksQuatity>0){
+                     console.log('trza ddać: '+req.body.addBooksQuatity + ' id: '+idBook);
+                     PhysicalBookDAO.addPhysicalBooks(idBook, req.body.addBooksQuatity)
+                 }
+                 if(req.body.deleteBooksQuantity>0){
+                     console.log('trza odjac '+req.body.deleteBooksQuantity);
+                     PhysicalBookDAO.removePhysicalBooks(idBook, req.body.deleteBooksQuantity)
+                 }
+                 res.status(201).json({ book: bookEdited });
+
+                })
              .catch(err => res.status(500).json({ err }))
                
         }

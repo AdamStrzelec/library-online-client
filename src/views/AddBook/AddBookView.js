@@ -12,9 +12,13 @@ class AddBookView extends React.Component {
         descriptionDraft: '',
         priceDraft: '',
         authorNameDraft: '',
+        newAuthorDraft: '',
         addedAuhors: [],
         foundedAuthors: [],
         authorFocused: false,
+        physicalBooksQuantity: 0,
+        physicalBooksQuantityInData: 0,
+        bookAdded: false,
     }
 
     componentDidMount = async () => {
@@ -28,6 +32,10 @@ class AddBookView extends React.Component {
                         .then(response => response.json())
                         .then(json => authors.push(json))
             }
+            const booksCountJson = await fetch('http://localhost:4000/physicalBooks/availableCount/'+this.props.match.params.id)
+                                            .then(response => response.json())
+                                            .then(json => this.setState({physicalBooksQuantity: json.physicalBooksCount,
+                                                                        physicalBooksQuantityInData: json.physicalBooksCount}))
             console.log(bookJson)
             console.log(authors);
             
@@ -36,7 +44,6 @@ class AddBookView extends React.Component {
                             descriptionDraft: bookJson.book.description,
                             priceDraft: bookJson.book.price,
                             addedAuhors: authors})
-            // console.log(bookJson.book.authors)
         }else{
             console.log('add')
         }
@@ -98,12 +105,19 @@ class AddBookView extends React.Component {
             authorsId.push({authorId: this.state.addedAuhors[i]._id});
         }
 
+        const { physicalBooksQuantityInData, physicalBooksQuantity } = this.state;
+        let booksToDelete = 0;
+        let booksToAdd = 0;
+        if(physicalBooksQuantity>physicalBooksQuantityInData){booksToAdd = physicalBooksQuantity-physicalBooksQuantityInData}
+        else{booksToDelete = physicalBooksQuantityInData-physicalBooksQuantity}
         const book = {
             name: this.state.bookNameDraft,
             bookImageUrl: this.state.imgUrlDraft,
             description: this.state.descriptionDraft,
             price: this.state.priceDraft,
-            authors: authorsId
+            authors: authorsId,
+            addBooksQuatity: booksToAdd,
+            deleteBooksQuantity: booksToDelete,
         }
         console.log(book)
         if(this.addBookIsFilled()){
@@ -117,13 +131,38 @@ class AddBookView extends React.Component {
                         // return result.json();
                         console.log('dodano książkę');
                         // return 'dodano ksiazke';
+                        // this.changeBooksQuantityInData();
+                        // this.setState({bookAdded: true});
+                        {this.props.match.params.id 
+                            ? context.openInfoModal('Książka została zmieniona')
+                            : context.openInfoModal('Książka została dodana')
+                        }
+                        
                     }                    
                 })
+                // if(this.state.bookAdded){this.changeBooksQuantityInData()}
+                // console.log(response)
         }else{
             context.openInfoModal('Musisz wypełnić wszystkie pola aby dodać książkę');
         }
     }
+    addAuthorToData = async (context) => {
+        if(this.state.newAuthorDraft.length>0){
+            await fetch('http://localhost:4000/authors',{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({authorName: this.state.newAuthorDraft})})
+                .then(result => {
+                    if(result.status===201){
+                        console.log('Dodano autora');
+                    }
+                })
+            context.openInfoModal('Dodano autora');
+        }else{
+            context.openInfoModal('To pole jest puste');
+        }
 
+    }
     addBookIsFilled = () => {
         const { bookNameDraft, imgUrlDraft, descriptionDraft, priceDraft, addedAuhors } = this.state;
         return bookNameDraft.length > 0 && imgUrlDraft.length > 0 && descriptionDraft.length > 0 && priceDraft > 0 && addedAuhors.length > 0;
@@ -156,9 +195,34 @@ class AddBookView extends React.Component {
                                 {this.state.addedAuhors.map(author => <li key={author._id}>{author.authorName} <span onClick={()=>this.removeAuthor(author)}>X</span></li>)}
                             </ul>
                         </div>
+                        <div className={styles.booksQuantity}>
+                            <p>
+                                Ilość dostępnych sztuk:
+                            </p>
+                            <p>
+                                <span>{this.state.physicalBooksQuantity}</span>
+                            </p>
+                            <div className={styles.booksQuantitySwitch}>
+                                <button onClick={() => 
+                                    {this.setState({physicalBooksQuantity: this.state.physicalBooksQuantity+1})}}>+</button>
+                                <button onClick={() => 
+                                    {this.state.physicalBooksQuantity>0 && this.setState({physicalBooksQuantity: this.state.physicalBooksQuantity-1})}}>-</button>
+                            </div>
+                        </div>
                         <button className={styles.addBookButton} onClick={()=>this.addBook(context)}>{this.props.match.params.id ? 'Edytuj książkę' : 'Dodaj książkę'}</button>
+                        {/* <div className={styles.addAuthor}>
+                            <h2 className={styles.header}>Dodaj Autora</h2>
+                            <div className={styles.addAuthorInput}>
+                                <ModalInput name='newAuthor' label='Doda autora' setValue={(e) => this.changeBookDraftProperty(e, 'newAuthorDraft')} />
+                                <button className={styles.addBookButton} onClick={this.addAuthor}>Dodaj</button>
+                            </div>
+                        </div> */}
                     </div>
-                    
+                    <h2 className={styles.header}>Dodaj Autora</h2>
+                    <div className={styles.addAuthor}>
+                        <ModalInput name='newAuthor' label='Nazwa autora' value={this.state.newAuthorDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'newAuthorDraft')} />
+                        <button className={styles.addBookButton} onClick={()=>this.addAuthorToData(context)}>Dodaj</button>
+                    </div>
                 </div>
                 )}
             </AppContext.Consumer>

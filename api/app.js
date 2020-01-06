@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const bookRoutes = require('./routes/books');
+const physicalBooksRoutes = require('./routes/physicalBooks');
 const authorRoutes = require('./routes/authors');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
@@ -23,6 +24,7 @@ app.use('/books', bookRoutes);
 app.use('/authors', authorRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/users', userRoutes);
+app.use('/physicalBooks', physicalBooksRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
