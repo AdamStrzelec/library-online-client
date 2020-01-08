@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React from 'react';
 import AppContext from '../../context';
 import styles from './UserInfo.module.scss';
@@ -78,9 +80,13 @@ render(){
     return (
         <AppContext.Consumer>
               {(context)=>(
-                  
+                  <div className="bg-secondary pt-5">
+                  <div className="col-4 offset-4 bg-light pt-3 border border-primary rounded">
             <form autoComplete="off" onSubmit={this.submitForm}>
+                <div className="offset-5">
                 <h2 className={styles.modalTitle}>Edycja</h2>
+                </div>
+                
                 <div>
                     <label>login</label>
                 <UserEditInput type='text' name='userName' id={context.user._id}  value={context.user.login}  />
@@ -123,8 +129,10 @@ render(){
                 </div>
 
                 {this.state.message != null && !this.state.userDataFetched && <p>{this.state.message}</p>}
-                <button type="submit" className={styles.submitButton}>Edytuj</button>
+                <button type="submit" className="btn btn-primary btn-lg mb-5 offset-5">Edytuj</button>
             </form>
+            </div>
+            </div>
              )}
         </AppContext.Consumer>
 

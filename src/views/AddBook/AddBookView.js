@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import AppContext from '../../context';
 import ModalInput from '../../components/Modal/ModalInput';
@@ -172,8 +173,9 @@ class AddBookView extends React.Component {
         return(
             <AppContext.Consumer>
                 {context => (
+                    <div className="col-6 offset-3">
                     <div className={styles.wrapper}>
-                    <h2 className={styles.header}>Dodaj książkę</h2>
+                    <h2 className="offset-4">Dodaj książkę</h2>
                     <ModalInput type='text' name='book name' label='Nazwa książki' value={this.state.bookNameDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'bookNameDraft')} />
                     <ModalInput type='text' name='img url' label='Adres obrazka' value={this.state.imgUrlDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'imgUrlDraft')} />
                     <ModalInput tag='textarea' type='text' name='description' value={this.state.descriptionDraft || ''} label='Opis' maxLength={500} setValue={(e) => this.changeBookDraftProperty(e, 'descriptionDraft')} />
@@ -223,6 +225,7 @@ class AddBookView extends React.Component {
                         <ModalInput name='newAuthor' label='Nazwa autora' value={this.state.newAuthorDraft || ''} setValue={(e) => this.changeBookDraftProperty(e, 'newAuthorDraft')} />
                         <button className={styles.addBookButton} onClick={()=>this.addAuthorToData(context)}>Dodaj</button>
                     </div>
+                </div>
                 </div>
                 )}
             </AppContext.Consumer>

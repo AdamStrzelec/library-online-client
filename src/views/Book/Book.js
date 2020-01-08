@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React from 'react';
 import AppContext from '../../context';
 import BookItem from '../../components/BookItem/BookItem';
@@ -110,7 +112,7 @@ class Book extends React.Component {
         return (
             <AppContext.Consumer>
                 {(context)=>(
-                <>
+                <div className="col-10 offset-1">
                 <div className="bookWrapper">
                     <BookInfo averageGrade={this.state.averageGrade} reviewsCount={this.state.reviewsCount} bookId={this.props.match.params.id}/>
                 </div>
@@ -123,15 +125,18 @@ class Book extends React.Component {
 
                         <button onClick={() => this.submit(context.userType, context.user, context)} className="addReviewBtn">Dodaj ocenę</button>
                         {context.user.userType==='admin'?
-                                <NavLink to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
+                                <NavLink className="btn btn-warning text-white btn-lg" to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
                                 }
                        
 
                 </div>
                 <div>
-                {reviews.map(review => <Reviews key={review.id} review={review} />)}
+                   
+                    {reviews.map(review => <Reviews key={review.id} review={review} />)}
+
+                   
                 </div>
-                </>
+                </div>
                 )}
             </AppContext.Consumer>
 
