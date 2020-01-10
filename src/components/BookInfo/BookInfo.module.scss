@@ -86,10 +86,23 @@
             cursor: pointer;
             color: rgb(255, 255, 255);
         }
-        .addToShoppingCartButton{
-            @extend .rentInfoButton;
-            background: rgb(13, 168, 13);     
-        }
+
+            .edit{
+                margin-top: 30px;
+                margin-bottom: 10px;
+                width: 200px;
+                height: 40px;
+                font-size: 16px;
+                font-weight: 700;
+                font-family: "Montserrat", sans-serif;
+                color: white;
+                background: rgb(13, 168, 13);
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }    
+        
         .rentNowButton{
             @extend .rentInfoButton;
             background: rgb(43, 144, 226);

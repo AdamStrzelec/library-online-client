@@ -122,9 +122,16 @@ class Book extends React.Component {
                         <ModalInput tag='textarea' name='review' label='Opinia' setValue={this.setReview}/>
 
                         <button onClick={() => this.submit(context.userType, context.user, context)} className="addReviewBtn">Dodaj ocenę</button>
-                        {context.user.userType==='admin'?
+                        {/* {context.user.userType==='admin'?
                                 <NavLink to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
-                                }
+                                } */}
+                        {/* {context.userType === 'logged' && context.user.userType==='admin' 
+                        ?<button >
+                            <NavLink to={'edit/book/'+this.props.match.params.id}>Edytuj</NavLink>
+                        </button>
+                        : <button >
+                        Wypożycz
+                        </button>} */}
                        
 
                 </div>

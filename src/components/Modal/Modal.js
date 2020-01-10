@@ -90,6 +90,56 @@ class Modal extends React.Component {
         }
 
     }
+    displayModalByType = (context, modalType, closeModalFn) => {
+        
+            if(modalType==='login' || modalType==='register'){
+                if(!this.state.userDataFetched){
+                    return this.displayForm(modalType);
+                }else{
+                    return (
+                    <div className={styles.infoModal}>
+                        <h2 className={styles.modalInfoMessage}>{this.state.message}</h2>
+                        <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
+                    </div>
+                    )
+                } 
+            }else if(modalType==='info'){
+                return (
+                    <div className={styles.infoModal}>
+                        <h2 className={styles.modalInfoMessage}>{this.props.modalInfo}</h2>
+                        <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
+                    </div>
+                )
+            }else if(modalType==='rentBook'){
+                return (
+                    <div className={styles.infoModal}>
+                        <h2 className={styles.modalInfoMessage}>tytuł: <strong>{this.props.modalRentBookName}</strong></h2>
+                        <h2 className={styles.modalInfoMessage}>cena: <strong>{this.props.modalRentBookPrice} zł</strong></h2>
+                        <button className={styles.confirmButton} onClick={()=>this.rentBook(context, closeModalFn)}>Wypożycz</button>
+                        <button className={styles.cancelButton} onClick={closeModalFn}>Anuluj</button>
+                    </div>
+                )
+            }
+        
+    }
+    rentBook = (context, closeModalFn) =>{
+        // closeModalFn();
+        console.log(this.props.modalRentBookId);
+        console.log(this.props.user._id);
+        fetch('http://localhost:4000/transactions/rentBook',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: this.props.user._id,
+                bookId: this.props.modalRentBookId
+            })})
+            .then(result => {
+                if(result.status===409){
+                    context.openInfoModal('Możesz posiadać tylko jeden egzemplarz tej książki');
+                }
+            })
+        closeModalFn();
+    }
     displayForm(modalType){
         return(
             <form autoComplete="off" onSubmit={this.submitForm}>
@@ -114,21 +164,27 @@ class Modal extends React.Component {
     render(){
         const {closeModalFn, modalType} = this.props;
         return(
-                <div className={styles.modalBackground}>
-                <div className={styles.modalWindow}>
-                    <button className={styles.closeModalButton} onClick={closeModalFn}><FontAwesomeIcon icon="times" size="2x" /></button>
-                        {this.props.modalType!=='info' ? !this.state.userDataFetched ?
-                            this.displayForm(modalType):
-                            <div className={styles.infoModal}>
-                                <h2 className={styles.modalInfoMessage}>{this.state.message}</h2>
-                                <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
-                            </div>
-                            : <div className={styles.infoModal}>
-                                <h2 className={styles.modalInfoMessage}>{this.props.modalInfo}</h2>
-                                <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
-                            </div>}
+            <AppContext.Consumer>
+                {context =>(
+                    <div className={styles.modalBackground}>
+                    <div className={styles.modalWindow}>
+                        <button className={styles.closeModalButton} onClick={closeModalFn}><FontAwesomeIcon icon="times" size="2x" /></button>
+                            {/* {this.props.modalType!=='info' ? !this.state.userDataFetched ?
+                                    this.displayForm(modalType):
+                                    <div className={styles.infoModal}>
+                                        <h2 className={styles.modalInfoMessage}>{this.state.message}</h2>
+                                        <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
+                                    </div>
+                                    : <div className={styles.infoModal}>
+                                        <h2 className={styles.modalInfoMessage}>{this.props.modalInfo}</h2>
+                                        <button className={styles.confirmButton} onClick={closeModalFn}>OK</button>
+                                    </div>} */}
+                            {this.displayModalByType(context, modalType, closeModalFn)}
+                        </div>
                     </div>
-                </div>
+                )}
+            </AppContext.Consumer>
+
         )    
     }
 }

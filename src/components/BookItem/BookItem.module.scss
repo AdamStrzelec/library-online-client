@@ -31,10 +31,12 @@
     .bookName{
         margin-top: 0;
         margin-bottom: 15px;
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 700;
         position: absolute;
         top: 10px;
+        color: rgb(0, 120, 189);
+        font-family: "Montserrat", sans-serif;
     }
     .authorWrapper{
         margin-top: 0;
@@ -72,15 +74,30 @@
         font-weight: bold;
     }
 }
-.addBook{
+.addEditBtn{
     width: 180px;
     height: 40px;
     font-size: 16px;
     font-weight: 700;
     color: rgb(255, 255, 255);
-    background: rgb(13, 168, 13);
+    // background: rgb(13, 168, 13);
     border: none;
     outline: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.addBook{
+    @extend .addEditBtn;
+
+    background: rgb(13, 168, 13);
+}
+.editBook{
+    @extend .addEditBtn;
+    background: darkblue;
+}
+.edit{
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
 }

@@ -72,6 +72,19 @@
         }
     }
 }
+.modalButton{
+    margin: 5px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    // background: rgb(35, 142, 88);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+}
 .infoModal{
     width: 100%;
     text-align: center;
@@ -80,15 +93,11 @@
         font-weight: 400;
     }
     .confirmButton{
-        height: 30px;
-        font-size: 16px;
-        font-weight: bold;
-        color: white;
+        @extend .modalButton;
         background: rgb(35, 142, 88);
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        outline: none;
-        cursor: pointer;
+    }
+    .cancelButton{
+        @extend .modalButton;
+        background: rgb(0, 132, 255);
     }
 }

@@ -12,6 +12,7 @@ import Contact from '../Contact/Contact';
 import Top from '../Top/Top';
 import Book from '../Book/Book';
 import User from '../User/User'
+import MyBooks from '../MyBooks/MyBooks';
 import LoggedUserPanel from '../../components/LoggedUserPanel/LoggedUserPanel';
 import AddBookView from '../AddBook/AddBookView';
 // import AddBookView from '../'
@@ -23,16 +24,21 @@ const modalTypes = {
   login: 'login',
   register: 'register',
   info: 'info',
+  rentBook: 'rentBook',
 }
 
 class App extends React.Component {
   state = {
     user: {},
     userType: 'unlogged',
+    userBooks: {},
     isModalOpen: false,
     isUserMenuOpen: false,
     modalType: modalTypes.login,
     modalInfoMessage: '',
+    rentModalBookName: '',
+    rentModalBookPrice: '',
+    rentModalBookId: '',
   }
   closeModal = () => {
     this.setState({isModalOpen: false})
@@ -48,6 +54,17 @@ class App extends React.Component {
       modalType: modalTypes.register,
       isModalOpen: true
     })
+  }
+  openRentBookModal = (bookName, price, bookId) => {
+    this.setState({
+      modalType: modalTypes.rentBook,
+      isModalOpen: true,
+      rentModalBookName: bookName,
+      rentModalBookPrice: price,
+      rentModalBookId: bookId,
+    })
+    
+
   }
   openInfoModal = (message) => {
     this.setState({
@@ -72,12 +89,17 @@ class App extends React.Component {
     this.setState({user: user,
                   userType: 'logged'})
   }
+  getUserBooks = (books) => {
+    this.setState({userBooks: books});
+  }
   render(){
     const contextElements = {
       ...this.state,
+      getUserBooks: this.getUserBooks,
       openLoginModal: this.openLoginModal,
       openRegisterModal: this.openRegisterModal,
       openInfoModal: this.openInfoModal,
+      openRentBookModal: this.openRentBookModal,
       changeUser: this.changeUser,
       userMenuSwitch: this.userMenuSwitch,
       logoutFn: this.logoutFn,
@@ -96,9 +118,17 @@ class App extends React.Component {
             <Route path="/add/book" component={AddBookView}/>
             <Route path="/user/:id" component={User}/>
             <Route path="/edit/book/:id" component={AddBookView}/>
-
+            <Route path="/mybooks" component={MyBooks}/>
           </Switch>
-          {this.state.isModalOpen && <Modal closeModalFn={this.closeModal} changeUserFn={this.changeUser} modalType={this.state.modalType} modalInfo={this.state.modalInfoMessage}/>}
+          {this.state.isModalOpen && <Modal 
+          closeModalFn={this.closeModal} 
+          changeUserFn={this.changeUser} 
+          modalType={this.state.modalType} 
+          modalInfo={this.state.modalInfoMessage}
+          modalRentBookName={this.state.rentModalBookName}
+          modalRentBookPrice={this.state.rentModalBookPrice}
+          modalRentBookId={this.state.rentModalBookId}
+          user={this.state.user}/>}
           {this.state.isUserMenuOpen && <LoggedUserPanel /> }
         </AppContext.Provider>
       </div>

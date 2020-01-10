@@ -50,7 +50,7 @@ exports.removePhysicalBooks = function(bookId, quantity){
     .then(book => {
         if(book){
             const books = [];
-            PhysicalBook.find({bookId: bookId}).limit(parseInt(quantity))
+            PhysicalBook.find({bookId: bookId, loan: false}).limit(parseInt(quantity))
             .exec()
             .then(result => {
                 for(let i=0; i<result.length; i++){
