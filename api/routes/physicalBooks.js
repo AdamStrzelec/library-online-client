@@ -19,5 +19,9 @@ router.delete('/removePhysicalBooks', (req, res, next) => {
     DAO.removePhysicalBooks(req,res);
 })
 
+router.get('/userBooks/:userId', (req, res, next) => {
+    DAO.getUserBooks(req, res);
+})
+
 
 module.exports = router;

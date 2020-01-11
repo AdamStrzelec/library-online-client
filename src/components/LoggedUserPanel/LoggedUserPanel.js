@@ -17,7 +17,7 @@ class LoggedUserPanel extends React.Component{
                         <li>
                             {context.user.userType==='admin'?
                                 <NavLink to={'/add/book'}>Dodak książkę</NavLink>:
-                                'Moje książki'}
+                                <NavLink to={'/mybooks/'+context.user._id}>Moje książki</NavLink>}
                         </li>
                         <li>
                             <button onClick={context.logoutFn}>

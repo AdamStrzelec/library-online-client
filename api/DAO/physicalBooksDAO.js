@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const PhysicalBook = require('../models/physicalBook');
 const Book = require('../models/book');
+const UserBooks = require('../models/userBooks');
 
 exports.getPhysicalBooksTotal = function(req, res){
     PhysicalBook.find({bookId: req.params.bookId})
@@ -64,4 +65,21 @@ exports.removePhysicalBooks = function(bookId, quantity){
         }
     })
     .catch(err => err)
+}
+
+exports.getUserBooks = function(req, res){
+    UserBooks.find({userId: req.params.userId})
+    .then(books => {
+        console.log(books)
+        res.status(200).json(books);
+    })
+    .catch(err => {res.status(500).json({error: err})})
+}
+
+function getBookById(bookId){
+    Book.findById(bookId)
+    .exec()
+    .then(book => {return book})
+    .catch(err => err)
+    return null;
 }

@@ -118,7 +118,7 @@ class App extends React.Component {
             <Route path="/add/book" component={AddBookView}/>
             <Route path="/user/:id" component={User}/>
             <Route path="/edit/book/:id" component={AddBookView}/>
-            <Route path="/mybooks" component={MyBooks}/>
+            <Route path="/mybooks/:userId" component={MyBooks}/>
           </Switch>
           {this.state.isModalOpen && <Modal 
           closeModalFn={this.closeModal} 
