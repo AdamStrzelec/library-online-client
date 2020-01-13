@@ -31,6 +31,10 @@ router.get('/:bookId', (req, res)  => {
     DAO.getBookById(req, res)
 })
 
+router.get('/book/:name', (req, res, next)=>{
+    DAO.getBookByName(req, res);
+})
+
 
 // router.get('/getTotalCount/:bookId', (req, res, next) => {
 //     // DAO.getPhysicalBooks(req, res);

@@ -1,6 +1,7 @@
 import React from 'react';
 import BookItem from '../../components/BookItem/BookItem';
 import './Home.css';
+import Searchbar from '../../components/Searchbar/Searchbar';
 import * as bookItemsApi from '../../helpers/booksApi';
 
 
@@ -23,7 +24,7 @@ class Home extends React.Component{
 
         return(
             <div className="homeWrapper">
-            <div>searchbar</div>
+            <Searchbar />
             <div className="items">                
                 {books.map(book => <BookItem key={book.id} book={book} />)}
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import AppContext from '../../context';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
+import {faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart, faSearch} from '@fortawesome/free-solid-svg-icons'
 import Header from '../../components/Header/Header';
 import Modal from '../../components/Modal/Modal';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -15,10 +15,11 @@ import User from '../User/User'
 import MyBooks from '../MyBooks/MyBooks';
 import LoggedUserPanel from '../../components/LoggedUserPanel/LoggedUserPanel';
 import AddBookView from '../AddBook/AddBookView';
+import SearchBookView from '../SearchBook/SearchBook';
 // import AddBookView from '../'
 
 
-library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart)
+library.add(faArrowAltCircleLeft, faArrowAltCircleRight, faUser, faUserCog, faSortDown, faTimes, faShoppingCart, faSearch)
 
 const modalTypes = {
   login: 'login',
@@ -119,6 +120,7 @@ class App extends React.Component {
             <Route path="/user/:id" component={User}/>
             <Route path="/edit/book/:id" component={AddBookView}/>
             <Route path="/mybooks/:userId" component={MyBooks}/>
+            <Route path="/search/book/:name" component={SearchBookView}/>
           </Switch>
           {this.state.isModalOpen && <Modal 
           closeModalFn={this.closeModal} 

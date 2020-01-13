@@ -71,6 +71,17 @@ exports.getBookById = function(req, res){
         .catch(err => {res.status(500).json({errorek: err})})
 }
 
+exports.getBookByName = function(req, res){
+    // res.status(200).json({books: req.params.name})
+    Book.find({'name': { "$regex": req.params.name, "$options": "i" }})
+    .exec()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json({error: err})
+    })
+}
 
 exports.editBookById = function(req, res){
     const id ={_id:req.params.bookId}
