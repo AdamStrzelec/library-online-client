@@ -23,5 +23,9 @@ router.get('/userBooks/:userId', (req, res, next) => {
     DAO.getUserBooks(req, res);
 })
 
+router.get('/quantity', (req, res, next)=>{
+    DAO.getQuantity(res);
+})
+
 
 module.exports = router;

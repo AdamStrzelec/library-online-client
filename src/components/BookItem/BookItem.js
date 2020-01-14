@@ -3,15 +3,15 @@ import AppContext from '../../context';
 import styles from './BookItem.module.scss';
 import BookItemAuthor from './BookItemAuthor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 
 
 
 let bookDescriptionLimit = (description) => {
     
-    if (description.length > 250) {
-        return description.substring(0, 250) + '...'
+    if (description.length > 200) {
+        return description.substring(0, 200) + '...'
     }
     return description
 }
@@ -27,6 +27,8 @@ class BookItem extends React.Component {
         authors: [],
         availableBooksQuantity: 0,
     }
+
+    
 
     componentDidMount = () => {
         //     let authorsArray = []
@@ -67,7 +69,7 @@ class BookItem extends React.Component {
                         <div className={styles.bookInfo}>
         
         
-                            <NavLink className={styles.bookName} to={'book/'+book.id}>{book.name}</NavLink>
+                            <NavLink className={styles.bookName} to={'/book/'+book.id}>{book.name}</NavLink>
         
                             <div className={styles.descriptionWrapper}>
                                 <p className={styles.description}>{bookDescriptionLimit(book.description, this.props.full)}</p>

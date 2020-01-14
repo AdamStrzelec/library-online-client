@@ -40,10 +40,10 @@ class Searchbar extends React.Component{
         fetch('http://localhost:4000/books/book/'+e.target.value)
         .then(response => response.json())
         .then(json => {
-            if(Array.isArray(json)){
-                if(json.length>0){
+            if(Array.isArray(json.books)){
+                if(json.books.length>0){
                     this.setState({
-                        books: json,
+                        books: json.books,
                         searchResultVisible: true,
                     })
                 }else{
@@ -76,7 +76,7 @@ class Searchbar extends React.Component{
                     onChange={this.changeSearchDraft} 
                     type='text' name='search' placeholder='Wyszukaj książkę'/>
 
-                <NavLink 
+                <NavLink className={styles.searchLink}
                         to={this.state.searchInputDraft !== '' ?
                             '/search/book/'+this.state.searchInputDraft
                             :window.location.pathname}
@@ -84,8 +84,11 @@ class Searchbar extends React.Component{
                         onClick={()=>{
                             this.setState({searchResultVisible: false})
                             }}>
-                    <FontAwesomeIcon
+                                <button className={styles.searchButton}>
+                                <FontAwesomeIcon
                     className={styles.searchBtn} icon="search" size="1x" />
+                                </button>
+
                 </NavLink>
 
                 {this.state.searchResultVisible && 

@@ -26,8 +26,8 @@ class SearchBookView extends React.Component{
         .then(response => response.json())
         .then(json => {
             console.log(json);
-            this.setState({books: json,
-                            foundedBooksQuantity: json.length});
+            this.setState({books: json.books,
+                            foundedBooksQuantity: json.books.length});
         })
     }
 

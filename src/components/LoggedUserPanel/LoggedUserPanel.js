@@ -13,11 +13,11 @@ class LoggedUserPanel extends React.Component{
                 {context => (
                 <div className={styles.wrapper} >
                     <ul>
-                        <li><NavLink to={'/user/'+context.user._id}>Moje Konto</NavLink></li>
+                        <li><NavLink className={styles.menuItem} to={'/user/'+context.user._id}>Moje Konto</NavLink></li>
                         <li>
                             {context.user.userType==='admin'?
-                                <NavLink to={'/add/book'}>Dodak książkę</NavLink>:
-                                <NavLink to={'/mybooks/'+context.user._id}>Moje książki</NavLink>}
+                                <NavLink className={styles.menuItem} to={'/add/book'}>Dodak książkę</NavLink>:
+                                <NavLink className={styles.menuItem} to={'/mybooks/'+context.user._id}>Moje książki</NavLink>}
                         </li>
                         <li>
                             <button onClick={context.logoutFn}>

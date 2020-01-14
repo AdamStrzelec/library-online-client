@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React from 'react';
 import AppContext from '../../context';
 import BookItem from '../../components/BookItem/BookItem';
@@ -43,6 +45,12 @@ class Book extends React.Component {
 
     }
     componentDidMount = () => {
+        // console.log('book+'+window.location.pathname)
+        // if(window.location.pathname!=='/'){
+        //     console.log('nie')
+        // }else{
+        //     console.log('tak')
+        // }
         // const bookJson = await api.getBookById(this.props.match.params.id);
         // const reviewsJson = await api.getReviewsByBookId(this.props.match.params.id);
         this.fetchInfo();
@@ -110,7 +118,7 @@ class Book extends React.Component {
         return (
             <AppContext.Consumer>
                 {(context)=>(
-                <>
+                <div className="col-10 offset-1">
                 <div className="bookWrapper">
                     <BookInfo averageGrade={this.state.averageGrade} reviewsCount={this.state.reviewsCount} bookId={this.props.match.params.id}/>
                 </div>
@@ -122,23 +130,19 @@ class Book extends React.Component {
                         <ModalInput tag='textarea' name='review' label='Opinia' setValue={this.setReview}/>
 
                         <button onClick={() => this.submit(context.userType, context.user, context)} className="addReviewBtn">Dodaj ocenę</button>
-                        {/* {context.user.userType==='admin'?
-                                <NavLink to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
-                                } */}
-                        {/* {context.userType === 'logged' && context.user.userType==='admin' 
-                        ?<button >
-                            <NavLink to={'edit/book/'+this.props.match.params.id}>Edytuj</NavLink>
-                        </button>
-                        : <button >
-                        Wypożycz
-                        </button>} */}
+                        {context.user.userType==='admin'?
+                                <NavLink className="btn btn-warning text-white btn-lg" to={'/edit/book/'+this.props.match.params.id}>Edytuj książkę</NavLink>: <p></p>
+                                }
                        
 
                 </div>
                 <div>
-                {reviews.map(review => <Reviews key={review.id} review={review} />)}
+                   
+                    {reviews.map(review => <Reviews key={review.id} review={review} />)}
+
+                   
                 </div>
-                </>
+                </div>
                 )}
             </AppContext.Consumer>
 

@@ -36,8 +36,12 @@ exports.addBook = function(bookBody, res){
      })
 }
 
-exports.getBooks = function(res){
+exports.getBooks = function(req, res){
+    const perPage = 10;
+    const page = parseInt(req.params.pageNr)-1;
     Book.find()
+        .limit(perPage)
+        .skip(perPage * page)
         .sort({date: -1})
         .then(result => {
             res.status(200).json({books: result.map(book => {
@@ -59,6 +63,30 @@ exports.getBooks = function(res){
         })
 }
 
+exports.getTopBooks = function(req, res){
+    Book.find()
+    .limit(parseInt(req.params.quantity))
+    .sort({averageGrade: -1})
+    .then(result => {
+        res.status(200).json({books: result.map(book => {
+            return {
+                id: book._id,
+                name: book.name,
+                bookImageUrl: book.bookImageUrl,
+                description: book.description,
+                price: book.price,
+                averageGrade: book.averageGrade,
+                authors: book.authors.map(author => {
+                    return {author: author.authorId}
+                })
+            }
+        })})
+    })
+    .catch(err => {
+        res.status(500).json({message: err})
+    })
+}
+
 exports.getBookById = function(req, res){
     Book
         .findById(req.params.bookId)
@@ -76,12 +104,29 @@ exports.getBookByName = function(req, res){
     Book.find({'name': { "$regex": req.params.name, "$options": "i" }})
     .exec()
     .then(result => {
-        res.status(200).json(result)
+        // res.status(200).json(result)
+        res.status(200).json({books: result.map(book => {
+            return {
+                id: book._id,
+                name: book.name,
+                bookImageUrl: book.bookImageUrl,
+                description: book.description,
+                price: book.price,
+                averageGrade: book.averageGrade,
+                authors: book.authors.map(author => {
+                    return {author: author.authorId}
+                })
+            }
+        })})
     })
     .catch(err => {
         res.status(500).json({error: err})
     })
 }
+
+// exports.getQuantity = function(req, res){
+//     res.status(200).json({quantity: 8});
+// }
 
 exports.editBookById = function(req, res){
     const id ={_id:req.params.bookId}

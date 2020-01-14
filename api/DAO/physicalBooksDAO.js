@@ -25,6 +25,12 @@ exports.getPhysicalBooksAvailable = function(req, res){
     })
 }
 
+exports.getQuantity = function(res){
+    Book
+        .find()
+        .then(books => res.status(200).json({quantity: books.length}));
+        // .catch(err => res.status(500).json({error: err});
+}
 
 exports.addPhysicalBooks = function(bookId, quantity){
     Book.findById(bookId)

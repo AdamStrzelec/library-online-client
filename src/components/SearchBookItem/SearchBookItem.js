@@ -9,11 +9,11 @@ const SearchBookItem = ({book}) => (
         <div className={styles.bookImage}>
             <img src={book.bookImageUrl} alt={book._id}/>
         </div>
-        <div className={styles.bookInfoLeft}>
-            <NavLink className={styles.bookName} to={'/book/'+book._id}>{book.name}</NavLink>
+        <div onClick={()=>{console.log(book)}} className={styles.bookInfoLeft}>
+            <NavLink className={styles.bookName} to={'/book/'+book.id}>{book.name}</NavLink>
             <div className={styles.authors}>
                 <ul>
-                    {book.authors.map(author => <li><p><BookItemAuthor authorId={author.authorId}/></p></li>)}
+                    {book.authors.map(author => <li><p><BookItemAuthor authorId={author.author}/></p></li>)}
                 </ul>
             </div>
         </div>

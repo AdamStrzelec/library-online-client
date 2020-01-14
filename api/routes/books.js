@@ -19,8 +19,8 @@ const inMemoryBooks = [
     },
 ]
 
-router.get('/', (req, res, next) => {
-    DAO.getBooks(res)
+router.get('/page/:pageNr', (req, res, next) => {
+    DAO.getBooks(req, res)
 })
 
 router.post('/', (req, res, next) => {
@@ -34,6 +34,14 @@ router.get('/:bookId', (req, res)  => {
 router.get('/book/:name', (req, res, next)=>{
     DAO.getBookByName(req, res);
 })
+
+router.get('/top/:quantity', (req, res, next)=>{
+    // res.status(200).json({books: 'top books'+req.params.quantity});
+    DAO.getTopBooks(req, res);
+})
+// router.get('/quantity', (req, res, next)=>{
+//     DAO.getQuantity(req, res);
+// })
 
 
 // router.get('/getTotalCount/:bookId', (req, res, next) => {

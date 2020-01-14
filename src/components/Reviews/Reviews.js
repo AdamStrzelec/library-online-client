@@ -15,6 +15,7 @@ class Reviews extends React.Component {
     render(){
         const { review } = this.props;
         return(
+            
             <div className={styles.wrapper}>
                 
 

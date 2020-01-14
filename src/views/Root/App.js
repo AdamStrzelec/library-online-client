@@ -16,6 +16,7 @@ import MyBooks from '../MyBooks/MyBooks';
 import LoggedUserPanel from '../../components/LoggedUserPanel/LoggedUserPanel';
 import AddBookView from '../AddBook/AddBookView';
 import SearchBookView from '../SearchBook/SearchBook';
+import Page from '../Page/Page';
 // import AddBookView from '../'
 
 
@@ -121,6 +122,7 @@ class App extends React.Component {
             <Route path="/edit/book/:id" component={AddBookView}/>
             <Route path="/mybooks/:userId" component={MyBooks}/>
             <Route path="/search/book/:name" component={SearchBookView}/>
+            <Route path="/page/:pageNr" component={Page}/>
           </Switch>
           {this.state.isModalOpen && <Modal 
           closeModalFn={this.closeModal} 

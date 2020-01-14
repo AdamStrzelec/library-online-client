@@ -21,14 +21,31 @@
     ul{
         list-style: none;
     }
-    .searchBtn{
+    .searchLink{
+        position: relative;
+    }
+    .searchButton{
         position: absolute;
-        width: 30px;
-        height: 80%;
-        padding: 10px 20px;
-        top: -5px;
-        right: -20px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: 700;
         color: gray;
+        background: transparent;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .searchBtn{
+        // position: absolute;
+        // width: 3px;
+        // height: 80%;
+        // padding: 10px 20px;
+        // top: -50px;
+        // right: 20px;
+        // color: gray;
     }
 
     .founded{
